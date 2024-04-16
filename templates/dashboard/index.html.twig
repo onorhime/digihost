@@ -1,0 +1,257 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}EliteForte Dashboard{% endblock %}
+
+{% block main %}
+      <!-- Main Content -->
+  <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+  <h2 class="h2">Welcome {{app.user.firstname}}</h2>
+  {# <button class="btn ac-modal-btn">
+    <i class="las la-plus-circle text-base md:text-lg"></i>
+    Make A Deposit
+  </button> #}
+</div>
+
+      <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+        <!-- Statistics -->
+        <div class="box col-span-12 bg-n0 dark:bg-bg4 min-[650px]:col-span-6 xxxl:col-span-3">
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <span class="font-medium">Total Balance</span>
+            <div class="relative">
+  
+
+</div>
+
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="h4 mb-4">${{ app.user.totalbalance|number_format('2', '.', ',') }} USD</h4>
+              <span class="flex items-center gap-1 whitespace-nowrap text-primary">
+                <i class="las la-arrow-up text-lg"></i> {{app.user.totalbalance / 100}} AVG
+              </span>
+            </div>
+            <div
+              class="-my-3 shrink-0 ltr:translate-x-3 xl:ltr:translate-x-7 xxxl:ltr:translate-x-2 4xl:ltr:translate-x-9 rtl:-translate-x-3 xl:rtl:-translate-x-7 xxxl:rtl:-translate-x-2 4xl:rtl:-translate-x-9">
+              <div class="progress-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class="box col-span-12 bg-n0 dark:bg-bg4 min-[650px]:col-span-6 xxxl:col-span-3">
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <span class="font-medium">Crypto Balance</span>
+            <div class="relative">
+  
+ 
+</div>
+
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="h4 mb-4">${{ app.user.cryptobalance|number_format('2', '.', ',') }} USD</h4>
+              <span class="flex items-center gap-1 whitespace-nowrap text-primary">
+                <i class="las la-arrow-up text-lg"></i> {{app.user.cryptobalance / 100}} AVG
+              </span>
+            </div>
+            <div
+              class="-my-3 shrink-0 ltr:translate-x-3 xl:ltr:translate-x-7 xxxl:ltr:translate-x-2 4xl:ltr:translate-x-9 rtl:-translate-x-3 xl:rtl:-translate-x-7 xxxl:rtl:-translate-x-2 4xl:rtl:-translate-x-9">
+              <div class="progress-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class="box col-span-12 bg-n0 dark:bg-bg4 min-[650px]:col-span-6 xxxl:col-span-3">
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <span class="font-medium">Loan Balance</span>
+            <div class="relative">
+  
+ 
+</div>
+
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="h4 mb-4">${{ app.user.loanbalance|number_format('2', '.', ',') }} USD</h4>
+              <span class="flex items-center gap-1 whitespace-nowrap text-primary">
+                <i class="las la-arrow-up text-lg"></i>  {{app.user.loanbalance / 100}} AVG
+              </span>
+            </div>
+            <div
+              class="-my-3 shrink-0 ltr:translate-x-3 xl:ltr:translate-x-7 xxxl:ltr:translate-x-2 4xl:ltr:translate-x-9 rtl:-translate-x-3 xl:rtl:-translate-x-7 xxxl:rtl:-translate-x-2 4xl:rtl:-translate-x-9">
+              <div class="progress-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class="box col-span-12 bg-n0 dark:bg-bg4 min-[650px]:col-span-6 xxxl:col-span-3">
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <span class="font-medium">Total Income</span>
+            <div class="relative">
+  
+
+</div>
+
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="h4 mb-4">${{ app.user.totalincome|number_format('2', '.', ',') }} USD</h4>
+              <span class="flex items-center gap-1 whitespace-nowrap text-primary">
+                <i class="las la-arrow-up text-lg"></i> {{app.user.totalincome / 100}} AVG
+              </span>
+            </div>
+            <div
+              class="-my-3 shrink-0 ltr:translate-x-3 xl:ltr:translate-x-7 xxxl:ltr:translate-x-2 4xl:ltr:translate-x-9 rtl:-translate-x-3 xl:rtl:-translate-x-7 xxxl:rtl:-translate-x-2 4xl:rtl:-translate-x-9">
+              <div class="progress-chart"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Assetchart -->
+        {# <div class="box col-span-12 overflow-x-hidden">
+          <div class="bb-dashed mb-4 flex flex-wrap items-center justify-between gap-3 pb-4">
+            <h4 class="h4">Your Assets</h4>
+            <div class="rounded-lg border border-n30 bg-primary/5 dark:border-n500">
+              <button id="one_month"
+                class="asset-btn px-4 py-2 text-xs font-medium first:rounded-s-lg last:rounded-e-lg">
+                1M
+              </button>
+              <button id="six_months"
+                class="asset-btn px-4 py-2 text-xs font-medium first:rounded-s-lg last:rounded-e-lg">
+                6M
+              </button>
+              <button id="one_year"
+                class="asset-btn active px-4 py-2 text-xs font-medium first:rounded-s-lg last:rounded-e-lg">
+                1Y
+              </button>
+              <button id="ytd" class="asset-btn px-4 py-2 text-xs font-medium first:rounded-s-lg last:rounded-e-lg">
+                YTD
+              </button>
+              <button id="all" class="asset-btn px-4 py-2 text-xs font-medium first:rounded-s-lg last:rounded-e-lg">
+                all
+              </button>
+            </div>
+          </div>
+          <div id="asset-chart"></div>
+        </div> #}
+        <!-- Latest Transactions -->
+        <div class="box col-span-12 lg:col-span-12">
+          <div class="bb-dashed mb-4 flex flex-wrap items-center justify-between gap-4 pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Latest Transaction</h4>
+            <div class="relative">
+  
+ 
+</div>
+
+          </div>
+          <div class="overflow-x-auto">
+            <div class="overflow-x-auto">
+        <div class="bg-n0 dark:bg-bg4 rounded-xl px-3 min-w-min mb-4 lg:mb-6">
+          <table cell-padding="0" cell-spacing="0" style="border-spacing: 0px 12px;"
+            class="w-full whitespace-nowrap p-0 border-none border-separate">
+            <tbody>
+              {% for transaction in app.user.transactions|reverse %}
+                <tr>
+                <td>
+                  <div class="py-5 pl-6 px-3 bg-secondary1/5 dark:bg-bg3 rounded-s-lg">
+                    {{loop.index}}
+                  </div>
+                </td>
+                <td>
+                  <div class="flex items-center py-2.5 gap-3 pr-6 min-w-[300px] px-3 bg-secondary1/5 dark:bg-bg3">
+                    {% set image = 
+                    (transaction.title is same as("Paypal Deposit") ) ? "assets/dashboard/images/paypal.png" :
+                    (transaction.title == "Card Deposit") ? "assets/dashboard/images/visa.png" :
+                    (transaction.title == "Crypto Deposit") ? "assets/dashboard/images/crypto.jpg" :
+                    "assets/dashboard/images/crypto.jpg"
+                    %}
+
+                    <img width="32" height="32" class="rounded-full shrink-0" src={{ asset(image) }} alt="img" />
+                    <div class="flex flex-col">
+                      <span class="font-medium inline-block mb-1">
+                        {{transaction.title}}
+                      </span>
+                      <span class="text-xs">{{ transaction.date|date('j M, y. h:i a') }}</span>
+                    </div>
+                  </div>
+                </td>
+                
+                <td class="w-[15%]">
+                  <div class="bg-secondary1/5 dark:bg-bg3 py-5 px-3">
+                   {{transaction.title}}
+                  </div>
+                </td>
+                <td class="w-[15%]">
+                  <div class="bg-secondary1/5 dark:bg-bg3 py-5 px-3">
+                    ${{ transaction.amount|number_format('2', '.', ',') }}
+                  </div>
+                </td>
+                <td>
+                  <div class="bg-secondary1/5 dark:bg-bg3 px-3 py-[13px]">
+                  {% if transaction.status is same as("failed") %}
+                    <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 !py-[11px] bg-secondary2/10 dark:bg-bg3 text-secondary2">
+                      {{transaction.status}}
+                    </span>
+                  {% endif %}
+                  {% if transaction.status is same as("pending")  %}
+                    <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 !py-[11px] bg-secondary3/10 dark:bg-bg3 text-secondary3">
+                      {{transaction.status}}
+                    </span>
+                  {% endif %}
+                  {% if transaction.status is same as("complete")  %}
+                    <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 !py-[11px] bg-primary/10 dark:bg-bg3 text-primary">
+                      {{transaction.status}}
+                    </span>
+                  {% endif %}
+                    
+                  </div>
+                </td>
+                {# <td>
+                  <div class="bg-secondary1/5 dark:bg-bg3 px-3 py-5 rounded-e-xl flex justify-end pr-5">
+                        <div class="relative">
+                    <i class="las la-ellipsis-v horiz-option-btn cursor-pointer"></i>
+                    <ul
+                        class="horiz-option hide absolute top-full z-[3] min-w-[122px] rounded-md bg-n0 p-3 shadow-[0px_6px_30px_0px_rgba(0,0,0,0.08)] duration-300 dark:bg-bg3 ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left">
+                    <li>
+                    <button
+                        class="block tn-modal-btn w-full text-start cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">
+                        See Details
+                    </button>
+                    </li>
+                    <li>
+                    <button
+                        class="block w-full text-start cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">
+                        Delete
+                    </button>
+                    </li>
+                    <li>
+                    <button
+                        class="block w-full text-start cursor-pointer rounded px-3 py-1 text-sm leading-normal duration-300 hover:bg-primary/10 dark:hover:bg-bg4">
+                        Share
+                    </button>
+                    </li>
+                    </ul>
+                    </div>
+                    </div>
+                </td> #}
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+        </div>
+ 
+      </div>
+          </div>
+          <a class="group mt-6 inline-flex items-center gap-1 font-semibold text-primary" href={{ path("transactions") }}>
+            See More
+            <i class="las la-arrow-right duration-300 group-hover:pl-2"></i>
+          </a>
+        </div>
+       
+        </div>
+      </div>
+    </div>
+  </main>
+  
+{% endblock %}
