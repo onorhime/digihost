@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href={{ asset("assets/dashboard/css/style.css")}} />
-    <link rel="shortcut icon" href={{ asset("assets/dashboard/images/favicon.ico")}} type="image/x-icon" />
+    <link rel="shortcut icon" href={{ asset("assets/dashboard/images/favicon.png")}} type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href={{ asset("assets/dashboard/third-party/nice-select2.css")}} />
     <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
@@ -119,12 +119,13 @@
             <!-- Profile dropdown -->
             <div class="relative shrink-0">
                 <div id="profile-btn" class="w-10 cursor-pointer md:w-12">
-                <h1 class="rounded-full" width="48" height="48" alt="profile img" >{{ app.user.username|slice(0, 1)| capitalize }}</h1>
+                <img src={{ asset("uploads/"~ app.user.image)}} class="rounded-full" width="48" height="48" alt="profile img"/>
                 </div>
                 <div id="profile"
                 class="hide absolute top-full z-20 rounded-md bg-n0 shadow-[0px_6px_30px_0px_rgba(0,0,0,0.08)] duration-300 dark:bg-bg4 ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left">
                 <div class="flex flex-col items-center border-b p-3 text-center dark:border-n500 lg:p-4">
-                    <h1  width="60" height="60" class="rounded-full" alt="profile img" >{{ app.user.username|slice(0, 1)| capitalize }}</h1>
+                     <img src={{ asset("uploads/"~ app.user.image)}} class="rounded-full" width="48" height="48" alt="profile img"/>
+               
                     <h6 class="h6 mt-2">{{app.user.firstname ~ " " ~ app.user.lastname}}</h6>
                     <span class="text-sm">{{app.user.email}}</span>
                 </div>
@@ -203,80 +204,50 @@
                     </li>
                     </ul>
                     </li>
-                    <li class="menu-li">
-                    <button class="menu-btn group bg-n0 dark:!border-n500 dark:!bg-bg4">
-                        <span class="flex items-center justify-center gap-2">
-                        <span class="menu-icon">
-                            <i class="las la-piggy-bank"></i>
-                        </span>
-                        <span class="menu-title font-medium">Accounts</span>
-                        </span>
-                        <span class="plus-minus">
-                        <i class="las la-plus text-xl"></i>
+                    
+                     <li class="menu-li">
+                  <button class="menu-btn group bg-n0 dark:!border-n500 dark:!bg-bg4">
+                    <span class="flex items-center justify-center gap-2">
+                      <span class="menu-icon">
+                        <i class="las la-piggy-bank"></i>
+                      </span>
+                      <span class="menu-title font-medium">My Accounts</span>
+                    </span>
+                    <span class="plus-minus">
+                      <i class="las la-plus text-xl"></i>
+                      <i class="las la-minus text-xl"></i>
+                    </span>
+                    <span class="chevron-down hidden">
+                      <i class="las la-angle-down text-base"></i>
+                    </span>
+                  </button>
+                  <ul class="submenu-hide submenu">
+                    <li>
+                      <a href={{ path("dashboard") }} class="submenu-link">
                         <i class="las la-minus text-xl"></i>
-                        </span>
-                        <span class="chevron-down hidden">
-                        <i class="las la-angle-down text-base"></i>
-                        </span>
-                    </button>
-                    <ul class="submenu-hide submenu">
-                        <li>
-                        <a href="./accounts/bank-account.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Bank Account</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="./accounts/account-overview.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Account Overview</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="./accounts/account-details.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Account Details</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="./accounts/deposit-details.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Deposit Details</span>
-                        </a>
-                        </li>
-                    </ul>
+                        <span>Checking Account</span>
+                      </a>
                     </li>
-                    <li class="menu-li">
-                    <button class="menu-btn group bg-n0 dark:!border-n500 dark:!bg-bg4">
-                        <span class="flex items-center justify-center gap-2">
-                        <span class="menu-icon">
-                            <i class="las la-credit-card"></i>
-                        </span>
-                        <span class="menu-title font-medium">Cards</span>
-                        </span>
-                        <span class="plus-minus">
-                        <i class="las la-plus text-xl"></i>
+                    <li>
+                      <a href={{ path("dashboard") }} class="submenu-link">
                         <i class="las la-minus text-xl"></i>
-                        </span>
-                        <span class="chevron-down hidden">
-                        <i class="las la-angle-down text-base"></i>
-                        </span>
-                    </button>
-                    <ul class="submenu-hide submenu">
-                        <li>
-                        <a href="./cards/card-overview.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Card Overview</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="./cards/card-details.html" class="submenu-link">
-                            <i class="las la-minus text-xl"></i>
-                            <span>Card Details</span>
-                        </a>
-                        </li>
-                    </ul>
+                        <span>Saving Account</span>
+                      </a>
                     </li>
+                    <li>
+                      <a href={{ path("loan") }} class="submenu-link">
+                        <i class="las la-minus text-xl"></i>
+                        <span>Loan Information</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href={{ path("card") }} class="submenu-link">
+                        <i class="las la-minus text-xl"></i>
+                        <span>Card Control</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
                     
                     <li class="menu-li">
                     <button class="menu-btn group bg-n0 dark:!border-n500 dark:!bg-bg4">
@@ -298,7 +269,7 @@
                         <li>
                         <a href={{ path('deposit') }} class="submenu-link">
                             <i class="las la-minus text-xl"></i>
-                            <span>Make Payment</span>
+                            <span>Make Deposit</span>
                         </a>
                         </li>
                         
@@ -407,15 +378,47 @@
                     </button>
                     <ul class="submenu-hide submenu">
                         <li>
-                        <a href="#" class="submenu-link">
+                        <a href={{ path("investment") }} class="submenu-link">
                             <i class="las la-minus text-xl"></i>
-                            <span>Investments</span>
+                            <span>Investment</span>
+                        </a>
+                        </li>
+                         <li>
+                        <a href={{ path("investments") }} class="submenu-link">
+                            <i class="las la-minus text-xl"></i>
+                            <span>Investment History</span>
                         </a>
                         </li>
                        
                     </ul>
                     </li>
-                    
+                    <li class="menu-li">
+                      <button class="menu-btn group bg-n0 dark:!border-n500 dark:!bg-bg4">
+                        <span class="flex items-center justify-center gap-2">
+                          <span class="menu-icon">
+                            <i class="las la-handshake"></i>
+                          </span>
+                          <span class="menu-title font-medium">Support</span>
+                        </span>
+                        <span class="plus-minus">
+                          <i class="las la-plus text-xl"></i>
+                          <i class="las la-minus text-xl"></i>
+                        </span>
+                        <span class="chevron-down hidden">
+                          <i class="las la-angle-down text-base"></i>
+                        </span>
+                      </button>
+                      <ul class="submenu-hide submenu">
+                      
+                        <li>
+                          <a href={{ path("contact") }} class="submenu-link">
+                            <i class="las la-minus text-xl"></i>
+                            <span>Contact Us</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                      
                 </ul>
                 </div>
                 <div class="px-4 xxl:px-6 xxxl:px-8">
@@ -463,18 +466,18 @@
                         </button>
                     </li>
                     </ul>
-                </div> #}
-                {# <div class="upgrade-part">
+                </div>  #}
+                 <div class="upgrade-part">
                     <img src={{ asset("assets/dashboard/images/upgrade.png")}} width="272" height="173" alt="upgrade" />
-                    <p class="mb-8 mt-6 text-sm">
+                    {# <p class="mb-8 mt-6 text-sm">
                     Upgrade your account to
                     <span class="font-semibold text-primary">PRO</span> for even
                     more examples.
                     </p>
                     <a href="#" class="btn flex w-full justify-center">
-                    Upgrade Now
+                    Upgrade Now #}
                     </a>
-                </div> #}
+                </div>
                 </div>
             </div>
             </div>
@@ -494,14 +497,13 @@
     <p class="text-sm max-md:w-full max-md:text-center lg:text-base">
       Copyright @ <span id="current-year"></span>
       <a class="text-primary" href="/"> EliteForte </a>
-      . Designed By
-      <a href="#" class="text-secondary1"> DevKing </a>
+     
     </p>
     <div class="justify-center max-md:flex max-md:w-full"></div>
     <ul class="flex gap-2 xxxl:gap-3">
   <li>
     <a
-      href="#"
+      href="https://www.instagram.com/eliteforte_?igsh=MzRlODBiNWFlZA=="
       aria-label="social link"
       class="inline-flex rounded-full border border-primary p-1 text-primary duration-300 hover:bg-primary hover:text-n0 md:p-1.5 xxxl:p-2">
       <i class="lab la-facebook-f"></i>
@@ -509,7 +511,7 @@
   </li>
   <li>
     <a
-      href="#"
+      href="https://www.instagram.com/eliteforte_?igsh=MzRlODBiNWFlZA=="
       aria-label="social link"
       class="inline-flex rounded-full border border-primary p-1 text-primary duration-300 hover:bg-primary hover:text-n0 md:p-1.5 xxxl:p-2">
       <i class="lab la-twitter"></i>
@@ -517,7 +519,7 @@
   </li>
   <li>
     <a
-      href="#"
+      href="https://www.instagram.com/eliteforte_?igsh=MzRlODBiNWFlZA=="
       aria-label="social link"
       class="inline-flex rounded-full border border-primary p-1 text-primary duration-300 hover:bg-primary hover:text-n0 md:p-1.5 xxxl:p-2">
       <i class="lab la-skype"></i>
@@ -525,7 +527,7 @@
   </li>
   <li>
     <a
-      href="#"
+      href="https://www.instagram.com/eliteforte_?igsh=MzRlODBiNWFlZA=="
       aria-label="social link"
       class="inline-flex rounded-full border border-primary p-1 text-primary duration-300 hover:bg-primary hover:text-n0 md:p-1.5 xxxl:p-2">
       <i class="lab la-instagram"></i>
@@ -541,15 +543,7 @@
   </li>
 </ul>
 
-    <ul
-      class="flex gap-3 text-sm max-lg:w-full max-lg:justify-center lg:gap-4 lg:text-base">
-      <li>
-        <a href={{ path("privacy") }}>Privacy Policy</a>
-      </li>
-      <li>
-        <a href={{ path("terms") }}>Terms of condition</a>
-      </li>
-    </ul>
+    
   </div>
 </footer>
 
@@ -565,83 +559,44 @@
           <i class="las la-times"></i>
         </button>
         <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
-          <h4 class="h4">Create Bank Account</h4>
+          <h4 class="h4">Get A Loan</h4>
         </div>
-        <form>
-          <p class="mb-4 text-lg font-medium">Profile Photo</p>
-          <div class="mb-6 flex flex-wrap items-center gap-5 xl:gap-10">
-            <img src={{ asset("assets/dashboard/images/placeholder.png")}} class="h-20 w-20 lg:h-auto lg:w-auto" alt="placeholder" />
-            <div class="flex gap-4">
-              <input type="file" name="photo" id="photo" class="hidden" />
-              <label for="photo" class="btn"> Upload Photo </label>
-              <button class="btn-outline">Cancel</button>
-            </div>
-          </div>
-          <div class="mt-6 grid grid-cols-2 gap-4 xl:mt-8 xxxl:gap-6">
-            <div class="col-span-2">
-              <label for="name" class="mb-4 block font-medium md:text-lg">
-                Account Holder Name
-              </label>
-              <input type="text"
-                class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"
-                placeholder="Enter Name" id="name" required />
-            </div>
-            <div class="col-span-2">
-              <label for="number" class="mb-4 block font-medium md:text-lg">
-                Phone Number
-              </label>
-              <input type="number"
-                class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"
-                placeholder="Enter Number" id="number" required />
-            </div>
-            <div class="col-span-2">
-              <label for="currency" class="mb-4 block font-medium md:text-lg">
-                Select Currency
-              </label>
-              <select name="currency" class="nc-select full dark:!border-n500">
-                <option value="usd">USD</option>
-                <option value="gbp">GBP</option>
-                <option value="yen">YEN</option>
-                <option value="jpn">JPN</option>
-              </select>
-            </div>
-            <div class="col-span-2 md:col-span-1">
-              <label for="rate" class="mb-4 block font-medium md:text-lg">
-                Interest Rate
-              </label>
-              <input type="number"
-                class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"
-                placeholder="Interest Rate %" id="rate" required />
-            </div>
-            <div class="col-span-2 md:col-span-1">
-              <label for="expire" class="mb-4 block font-medium md:text-lg">
-                Expiry Date
-              </label>
-              <div class="relative bg-secondary1/5 py-3 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl">
-                <input id="date" class="border-none" placeholder="Select Date" autocomplete="off" />
-                <i class="las la-calendar absolute ltr:right-4 rtl:left-4 top-1/2 -translate-y-1/2 cursor-pointer"></i>
-              </div>
-            </div>
+        <form id="loanform">
+          
             <div class="col-span-2">
               <label for="amount" class="mb-4 block font-medium md:text-lg">
                 Amount
               </label>
               <input type="number"
                 class="w-full rounded-3xl border border-n30 bg-secondary1/5 px-6 py-2.5 dark:border-n500 dark:bg-bg3 md:py-3"
-                placeholder="Enter Amount" id="amount" required />
+                placeholder="Enter Amount" name="amount" id="amount" required />
             </div>
             <div class="col-span-2">
               <label for="status" class="mb-4 block font-medium md:text-lg">
-                Select Status
+                Select Duration
               </label>
               <select name="currency" class="nc-select full dark:!border-n500">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+              <option value="inactive">1 Week</option>
+                <option value="active">1 Month</option>
+                <option value="inactive">3 Month</option>
+                <option value="active">6 Month</option>
+                <option value="inactive">1 Year</option>
+                <option value="active">2 Years</option>
+                
               </select>
             </div>
+             <div class="col-span-2 md:col-span-1">
+                    <label for="account" class="mb-4 md:text-lg font-medium block">
+                    2FA Authorization Code
+                    </label>
+                    <input type="number"
+                    class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
+                    placeholder="0000" maxLength="4" name="pin" id="pin" required />
+                </div>
+            <br>
             <div class="col-span-2 mt-4">
-              <button class="btn flex w-full justify-center" type="submit">
-                Create Account
+              <button class="btn flex w-full justify-center" id="loanbtn" type="submit">
+               Loan 
               </button>
             </div>
           </div>

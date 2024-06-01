@@ -49,6 +49,20 @@
                 <span class="text-xs xxl:text-sm">365 Credits</span>
               </div>
             </div>
+
+              <div
+              class="col-span-12 cursor-pointer border border-dashed qt-modal-internal-btn duration-300 border-transparent hover:border-primary lg:col-span-6 xxxl:col-span-4 box  bg-primary/5 dark:bg-bg3 flex items-center gap-4 4xl:gap-6 xl:p-3 min-[1880px]:p-6">
+              <span
+                class="bg-n0 dark:bg-bg4 w-10 h-10 xxl:w-16 xxl:h-16 flex items-center justify-center shrink-0 rounded-full shadow-[0px_6px_40px_0px_rgba(0,0,0,0.02)]">
+                <i class="las text-2xl xxl:text-3xl la-exchange-alt"></i>
+              </span>
+              <div>
+                <h5 class="text-base xxl:text-lg 4xl:text-xl font-medium mb-1 xxl:mb-2">
+                  Internal Transfer
+                </h5>
+                <span class="text-xs xxl:text-sm">465 Credits</span>
+              </div>
+            </div>
             {# <div
               class="col-span-12 cursor-pointer border border-dashed qt-modal-paypal-btn duration-300 border-transparent hover:border-primary lg:col-span-6 xxxl:col-span-4 box  bg-primary/5 dark:bg-bg3 flex items-center gap-4 4xl:gap-6 xl:p-3 min-[1880px]:p-6">
               <span
@@ -119,7 +133,7 @@
                     <label for="number" class="md:text-lg font-medium block mb-4">
                     Bank Account Number (IBAN)
                     </label>
-                    <input type="number"
+                    <input type="text"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
                     placeholder="000-000-000-000-000" name="accountnumber" id="accountnumber" required />
                 </div>
@@ -128,15 +142,22 @@
                     <label for="number" class="md:text-lg font-medium block mb-4">
                     Bic/Swift Code
                     </label>
-                    <input type="number"
+                    <input type="text"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
                     placeholder="000-000-000-000-000" name="swift" id="swift" required />
                 </div>
                 
-               
+                <div class="col-span-2 md:col-span-1">
+                    <label for="account" class="mb-4 md:text-lg font-medium block">
+                    2FA Authorization Code
+                    </label>
+                    <input type="number"
+                    class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
+                    placeholder="0000" maxLength="4" name="pin" id="pin" required />
+                </div>
                 <div class="col-span-2 flex gap-4 md:gap-6 mt-2">
                     <button class="btn" type="submit">
-                    Pay Now
+                    Withdraw Now
                     </button>
                     <button class="btn-outline" type="reset">
                     Cancel
@@ -193,13 +214,20 @@
                 </div>
                 
                 
-                
+                 <div class="col-span-2 md:col-span-1">
+                    <label for="account" class="mb-4 md:text-lg font-medium block">
+                    2FA Authorization Code
+                    </label>
+                    <input type="number"
+                    class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
+                    placeholder="0000" maxLength="4" name="pin" id="pin" required />
+                </div>
 
                 
                 
                 <div class="col-span-2 flex gap-4 md:gap-6 mt-2">
                     <button class="btn" type="submit">
-                    Pay Now
+                    Withdraw Now
                     </button>
                     <button class="btn-outline" type="reset">
                     Cancel
@@ -213,35 +241,35 @@
 
     {# modal 3 #}
 
-   <div class="qt-modal-paypal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+   <div class="qt-modal-internal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
         <div class="overflow-y-auto">
             <div
             class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
             <div class="relative">
-                <button class="qt-modal-paypal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
+                <button class="qt-modal-internal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
                 <i class="las la-times"></i>
                 </button>
                 <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
-                <h4 class="h4">Deposit By Paypal</h4>
+                <h4 class="h4">Internal Transfer</h4>
                 </div>
 
-                <form class="grid grid-cols-2 gap-4 xxxl:gap-6" id="paypalform">
+                <form class="grid grid-cols-2 gap-4 xxxl:gap-6" id="internalform">
                 
                 <div class="col-span-2 md:col-span-1">
                     <label for="account" class="mb-4 md:text-lg font-medium block">
-                    Paypal Account Name
+                    Account Name
                     </label>
                     <input type="text"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
-                    value="Account Name" readonly id="account" required />
+                    value="Account Name" name="name" id="name" required />
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <label for="account" class="mb-4 md:text-lg font-medium block">
-                    Paypal Email Address
+                    Account Number
                     </label>
-                    <input type="text" readonly
+                    <input type="text"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
-                    placeholder="Enter Account" name="wallet" value="Paypal Email"required />
+                    placeholder="Enter Account" name="number" required />
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <label for="account" class="mb-4 md:text-lg font-medium block">
@@ -249,17 +277,18 @@
                     </label>
                     <input type="number"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
-                    placeholder="Enter Amount" name="amount" id="account" required />
+                    placeholder="Enter Amount" max="{{app.user.totalbalance}}" min="100" name="amount" id="amount" required />
                 </div>
+               
                 <div class="col-span-2 md:col-span-1">
                     <label for="account" class="mb-4 md:text-lg font-medium block">
-                    Payment Proof
+                    2FA Authorization Code
                     </label>
-                    <input type="file" accept="image/*"
+                    <input type="number"
                     class="w-full text-sm  bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-3 md:px-6 py-2 md:py-3"
-                    name="image" name="image" id="account" required />
+                    placeholder="0000" maxLength="4" name="pin" id="pin" required />
                 </div>
-                
+
                 
 
                 
@@ -277,6 +306,10 @@
             </div>
         </div>
    </div>
+
+   
+
+
 {% endblock %}
 
 {% block customJs %}

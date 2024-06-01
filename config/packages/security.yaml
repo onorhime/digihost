@@ -16,10 +16,6 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            form_login:
-                login_path: login
-                check_path: login
-                default_target_path: verify
             logout:
                 path: logout
                 target: home
@@ -28,6 +24,8 @@ security:
                 lifetime: 604800 # 1 week in seconds
                 path: /
                 always_remember_me: true
+            entry_point: App\Security\AuthenticationEntryPoint
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

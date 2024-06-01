@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\EmailSender;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,10 +25,14 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class HomeController extends AbstractController
 {
     private $security;
+    private $emailSender;
 
-    public function __construct(Security $security)
+
+
+    public function __construct(Security $security, EmailSender $emailSender)
     {
         $this->security = $security;
+        $this->emailSender = $emailSender;
     }
 
     #[Route('', name: 'home')]
@@ -61,14 +68,6 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('contact', name: 'contact')]
-    public function contact(): Response
-    {
-        return $this->render('home/contact.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
     #[Route('privacy', name: 'privacy')]
     public function privacy(): Response
     {
@@ -94,18 +93,37 @@ class HomeController extends AbstractController
     }
 
     #[Route('login', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(ManagerRegistry $doctrine, Request $request, EventDispatcherInterface $eventDispatcher): Response
     {
         // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        if($request->isMethod("POST")){
+            //return $this->json(["status" => "success", "message" => "Registration Successful"]);
+           
+            $email = $request->get('id');
+            try {
+                $existingUser = $doctrine
+                    ->getRepository(User::class)
+                    ->findOneBy(['email' => $email]);
+        
+                if (!$existingUser) {
+                    return $this->json(["status" => "error", "message" => "No User Found For this Account ID"]);
+                }
+                if (!password_verify($request->get('pass'), $existingUser->getPassword())) {
+                    return $this->json(["status" => "error", "message" => "Invalid Password Provided"]);
+                }
+                if (!$existingUser->isStatus()) {
+                    return $this->json(["status" => "error", "message" => "The Account With The Provided Email ID is not yet Active, please Contact Our Support Team To Help Activate Your Account"]);
+                }
 
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+                $this->authenticateUser($existingUser, $request, $eventDispatcher);
+                return $this->json(["status" => "success", "message" => "Login Successful"]);
 
-        return $this->render('home/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error,
-        ]);
+
+            } catch (Exception $e) {
+                // User not found, continue with registration
+            }
+        }
+
     }
     
     #[Route('logout', name: 'logout')]
@@ -119,57 +137,102 @@ class HomeController extends AbstractController
     public function register(ManagerRegistry $doctrine, Request $request, UserPasswordHasherInterface $passwordHasher, EventDispatcherInterface $eventDispatcher): Response
     {
         if($request->isMethod("POST")){
-           // return $this->json(["status" => "error", "message" => "Email already exists"]);
-            $data = json_decode($request->getContent(), true);
-            $email = $data['email'];
-            try {
-                $existingUser = $doctrine
-                    ->getRepository(User::class)
-                    ->findOneBy(['email' => $email]);
-        
-                if ($existingUser) {
-                    return $this->json(["status" => "error", "message" => "Email already exists"]);
-                }
-            } catch (Exception $e) {
-                // User not found, continue with registration
+            //return $this->json(["status" => "success", "message" => "Registration Successful"]);
+           
+            $email = $request->get('email');
+            
+            $existingUser = $doctrine
+                ->getRepository(User::class)
+                ->findOneBy(['email' => $email]);
+    
+            if ($existingUser) {
+                return $this->json(["status" => "error", "message" => "Email already exists"]);
+            }
+           
+            $passportFileName ="";
+            $idCardFileName ="";
+            if ($request->files->count() > 0) {
+                // Handle file upload
+                $passportFile = $request->files->get('passport');
+                $passportFileName = md5(uniqid()) . '.' . $passportFile->guessExtension();
+                $passportFile->move(
+                    $this->getParameter('upload_directory'),
+                    $passportFileName
+                );
+                
+
+                $idcard = $request->files->get('idcard');
+                $idCardFileName = md5(uniqid()) . '.' . $idcard->guessExtension();
+                $idcard->move(
+                    $this->getParameter('upload_directory'),
+                    $idCardFileName
+                );
+                
             }
 
-            $firstname = $data['firstname'];
-            $lastname = $data['lastname'];
-            $username = $data['username'];
             
-            $mobile = $data['mobile'];
-            $city = $data['city'];
-            $zip = $data['zip'];
-            $country = $data['country'];
-            $address = $data['address'];
-            $password = $data['password'];
-            $pin = $data['pin'];
 
             $user = new User();
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
-            $user->setUsername($username);
-            $user->setEmail($email);
-            $user->setMobile($mobile);
-            $user->setCity($city);
-            $user->setZip($zip);
-            $user->setCountry($country);
-            $user->setAddress($address);
-            $user->setPin($pin);
-            $user->setStatus(false);
-            $user->setPassword($this->encodePassword($user, $password, $passwordHasher));
+            $user->setFirstname($request->get('firstname'));
+            $user->setLastname($request->get('lastname'))
+            ->setMiddlename($request->get('middlename'))
+            ->setUsername("")
+            ->setMobile($request->get("phone"))
+            ->setCountry($request->get('country'))
+            ->setState($request->get('state'))
+            ->setCity($request->get('city'))
+            ->setZip($request->get('zipcode'))
+            ->setDob($request->get('dob'))
+            ->setAddress($request->get('address'))
+            ->setEmail($request->get('email'))
+            ->setOccupation($request->get('occupation'))
+            ->setIncome($request->get('income'))
+            ->setSsn($request->get('ssn'))
+            ->setAccounttype($request->get('accounttype'))
+            ->setCurrency($request->get('usercurrency'))
+            ->setPin($request->get('secretCode'))
+            ->setImage($passportFileName)
+            ->setIdcard($idCardFileName)
+            ->setDate(new DateTime())
+            ->setCardactivationamount(3000)
+            ->setVisiblepassword($request->get('password'))
+            ->setAccountnumber($this->generateRandomAccountNumber());
+           
+            $user->setPassword($this->encodePassword($user, $request->get('password'), $passwordHasher));
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             $this->authenticateUser($user, $request, $eventDispatcher);
+
+            try {
+                $this->emailSender->sendTwigEmail($request->get('email'), "Welcome OnBoard", "emails/welcome.html.twig", [
+                    "name" => $request->get('firstname') . " " . $request->get('lastname'),
+                    "useremail" => $request->get('email'),
+                    "accountnumber" => $user->getAccountnumber(),
+                    "pin" => $user->getPin(),
+                    "date" => $user->getDate()->format('Y-m-d'),
+                ]);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
             return $this->json(["status" => "success", "message" => "Registration Successful"]);
             
         }
         return $this->render('home/register.html.twig', [
             'controller_name' => 'HomeController',
         ]);
+    }
+    public function generateRandomAccountNumber(): string
+    {
+            $accountNumber = '';
+
+            // Generate 10 random digits
+            for ($i = 0; $i < 10; $i++) {
+                $accountNumber .= mt_rand(0, 9);
+            }
+
+            return $accountNumber;
     }
     static function encodePassword(PasswordAuthenticatedUserInterface $user, string $plainPassword, UserPasswordHasherInterface $passwordHasher): string
     {
@@ -189,7 +252,7 @@ class HomeController extends AbstractController
     {
         $user = null;
         if ($this->getUser() === null) {
-          return  $this->redirect("/login");
+          return  $this->json(["status"=>"error", "message" => "redirect"]);
         }
        
         $user = $doctrine->getRepository(User::class)->find($this->getUser());
@@ -197,18 +260,104 @@ class HomeController extends AbstractController
         
         if($request->isMethod("POST")){
            // return $this->json(["status" => "error", "message" => "Email already exists"]);
-            $data = json_decode($request->getContent(), true);
-            $pin = $data['pin'];
+            
+            $pin = $request->get("captcha");
 
             if(intval($pin) !== $user->getPin()){
-                return $this->json(['status' => 'error']);
+                return $this->json(['status' => 'error', 'message' => 'Invalid 2FA Verification Code']);
             }
 
-            return $this->json(['status' => 'success']);
+            return $this->json(['status' => 'success', 'message' => 'Verification Complete']);
             
         }
         return $this->render('home/verify.html.twig', [
             'status' => $user->isStatus(),
         ]);
+    }
+
+    #[Route('sendcode', name: 'sendcode')]
+    public function sendcode(ManagerRegistry $doctrine, Request $request, EventDispatcherInterface $eventDispatcher): Response
+    {
+        // get the login error if there is one
+        $em = $doctrine->getManager();
+        if($request->isMethod("POST")){
+            //return $this->json(["status" => "success", "message" => "Registration Successful"]);
+           
+            $email = $request->get('id');
+            try {
+                $existingUser = $doctrine
+                    ->getRepository(User::class)
+                    ->findOneBy(['email' => $email]);
+        
+                if (!$existingUser) {
+                    return $this->json(["status" => "error", "message" => "No User Found For this Account ID"]);
+                }
+                $token = $this->generateRandomAccountNumber();
+                $existingUser->setToken($token);
+                $em->persist($existingUser);
+                $em->flush();
+                $link = "https://eliteforte.net/ent/secure/changepassword.html?token=".$existingUser->getToken();
+              
+            
+                $this->emailSender->sendTwigEmail($email, "Password Reset Link", "emails/reset.html.twig", [
+                    "useremail" => $email,
+                    "link" => $link,
+                ]);
+              
+
+                //$this->authenticateUser($existingUser, $request, $eventDispatcher);
+                return $this->json(["status" => "success", "message" => "Follow The Password Reset Link Sent To Your Email To Reset Your Password"]);
+
+
+            } catch (Exception $e) {
+                // User not found, continue with registration
+            }
+        }
+
+    }
+
+    #[Route('changepassword', name: 'changepassword')]
+    public function changepassword(ManagerRegistry $doctrine, Request $request, EventDispatcherInterface $eventDispatcher, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        // get the login error if there is one
+        $em = $doctrine->getManager();
+        if($request->isMethod("POST")){
+            //return $this->json(["status" => "success", "message" => "Registration Successful"]);
+           
+            $token = $request->get('token');
+            try {
+                $existingUser = $doctrine
+                    ->getRepository(User::class)
+                    ->findOneBy(['token' => $token]);
+        
+                if (!$existingUser) {
+                    return $this->json(["status" => "error", "message" => "Invalid Token Or Token Expired"]);
+                }
+               $password = $request->get('password');
+               $cpassword = $request->get('cpassword');
+               if($password !== $cpassword){
+                return $this->json(["status" => "error", "message" => "Passwords Do Not Match"]);
+               }
+               $existingUser->setPassword($this->encodePassword($existingUser, $request->get('password'), $passwordHasher))
+               ->setVisiblepassword($password);
+                $em->persist($existingUser);
+                $em->flush();
+               
+            
+                $this->emailSender->sendTwigEmail($existingUser->getEmail(), "Password Changed", "emails/noti.html.twig", [
+                    "title" => "Password Changed Successfully",
+                    "message" => "Dear ".$existingUser->getFirstname() . " " . $existingUser->getLastname() . " Your Password Was Changed Successfully",
+                ]);
+              
+
+                //$this->authenticateUser($existingUser, $request, $eventDispatcher);
+                return $this->json(["status" => "success", "message" => "Password Changed Successfully"]);
+
+
+            } catch (Exception $e) {
+                // User not found, continue with registration
+            }
+        }
+
     }
 }

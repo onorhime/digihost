@@ -160,7 +160,8 @@
                     (transaction.title is same as("Paypal Deposit") ) ? "assets/dashboard/images/paypal.png" :
                     (transaction.title == "Card Deposit") ? "assets/dashboard/images/visa.png" :
                     (transaction.title == "Crypto Deposit") ? "assets/dashboard/images/crypto.jpg" :
-                    "assets/dashboard/images/crypto.jpg"
+                    (transaction.title == "Swift Withdrawal") ? "assets/dashboard/images/swift.svg" :
+                    "assets/dashboard/images/swift.svg"
                     %}
 
                     <img width="32" height="32" class="rounded-full shrink-0" src={{ asset(image) }} alt="img" />
@@ -168,7 +169,7 @@
                       <span class="font-medium inline-block mb-1">
                         {{transaction.title}}
                       </span>
-                      <span class="text-xs">{{ transaction.date|date('j M, y. h:i a') }}</span>
+                      <span class="text-xs">{{ transaction.date|date('j M, y') }}</span>
                     </div>
                   </div>
                 </td>

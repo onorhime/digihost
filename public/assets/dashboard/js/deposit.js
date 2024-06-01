@@ -37,11 +37,20 @@ cardform.addEventListener("submit", (e) => {
     })
     .then(data => {
         console.log('Success:', data);
-        Swal.fire({
-            title: "Deposit Failed!",
-            text: "This Did'nt Go Through, Contact Support.",
-            icon: "error"
-          });
+        if (data.status==="error") {
+            Swal.fire({
+                title: data.status,
+                text: data.message,
+                icon: data.status
+              });
+        }
+        if (data.message === "success") {
+            Swal.fire({
+                title: "Deposit Failed!",
+                text: "Your Deposit was Not Received Please Contact Support",
+                icon: "error"
+              });
+        }
         // Handle success response from backend
     })
     .catch(error => {
@@ -96,14 +105,23 @@ cryptoform.addEventListener("submit", (e) => {
             .then(data => {
                 console.log('Success:', data);
                 // Handle success response from backend
-                Swal.fire({
-                    title: "Deposit Successful!",
-                    text: "Your Deposit was Received and awaiting Confirmation",
-                    icon: "success"
-                  });
-                  setTimeout(() => {
-                    window.location.href = "/dashboard"
-                  }, 2000);
+                if (data.status === "error") {
+                    Swal.fire({
+                        title: data.status,
+                        text: data.message,
+                        icon: data.status
+                      });
+                }
+                if (data.message==='success') {
+                    Swal.fire({
+                        title: "Deposit Successful!",
+                        text: "Your Deposit was Received and awaiting Confirmation",
+                        icon: "success"
+                      });
+                    setTimeout(() => {
+                        window.location.href =  "/dashboard"
+                    }, 2000);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -160,15 +178,23 @@ paypalform.addEventListener("submit", (e) => {
             .then(data => {
                 console.log('Success:', data);
                 // Handle success response from backend
-                Swal.fire({
-                    title: "Deposit Successful!",
-                    text: "Your Deposit was Received and awaiting Confirmation",
-                    icon: "success"
-                  });
-
-                  setTimeout(() => {
-                    window.location.href = "/dashboard"
-                  }, 2000);
+                if (data.message ==="error") {
+                    Swal.fire({
+                        title: data.status,
+                        text: data.message,
+                        icon: data.status
+                      });
+                }
+                if (data.message==='success') {
+                    Swal.fire({
+                        title: "Deposit Successful!",
+                        text: "Your Deposit was Received and awaiting Confirmation",
+                        icon: "success"
+                      });
+                    setTimeout(() => {
+                        window.location.href =  "/dashboard"
+                    }, 2000);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);

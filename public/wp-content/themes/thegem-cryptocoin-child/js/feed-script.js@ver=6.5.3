@@ -1,0 +1,27 @@
+jQuery(document).ready(function($) {
+  
+  
+
+
+  $.get("/js/feed2.php", function(data){
+     $("#rev_slider_8_1 span").append('BTCUSD '+data);
+    $("#rev_slider_6_1 span").append('BTCUSD '+data);
+    //alert(data); // This won't fire til somedata.php is loaded
+  });
+
+  //$('#rev_slider_8_1 span').last().text('HELLO');
+  //$('#bitfeed span').last().text('baa baa black sheep');
+  //$('#my-custom span').load('feed2.php');
+  //$('#mydiv').text('changed..');
+
+   /* 
+   setInterval(function(){
+    $.get("/js/feed2.php", function(data){
+     $("#rev_slider_8_1 span").empty().append('BTCUSD '+data);
+    $("#rev_slider_6_1 span").empty().append('BTCUSD '+data);
+    //alert(data); // This won't fire til somedata.php is loaded
+  });
+  },1000); 
+  */
+
+})

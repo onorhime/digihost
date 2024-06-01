@@ -38,17 +38,17 @@ const isDarkMode = localStorage.getItem("darkMode") === "true";
 // load dark images
 const loadImg = () => {
   if (document.body.classList.contains("dark")) {
-    logoFull.setAttribute("src", "../images/logo-with-text.png");
-    logoFull2.setAttribute("src", "../images/logo-with-text.png");
-    logoIcon.setAttribute("src", "../images/logo.png");
-    logoText.setAttribute("src", "../images/logo-text.png");
-    qrCodeImg && qrCodeImg.setAttribute("src", "../images/qrcode.png");
+    logoFull.setAttribute("src", "/assets/dashboard/images/logo-with-text.png");
+    logoFull2.setAttribute("src", "/assets/dashboard/images/logo-with-text.png");
+    logoIcon.setAttribute("src", "/assets/dashboard/images/logo.png");
+    logoText.setAttribute("src", "/assets/dashboard/images/logo-text.png");
+    qrCodeImg && qrCodeImg.setAttribute("src", "/assets/dashboard/images/qrcode.png");
   } else {
-    logoFull.setAttribute("src", "../images/logo-with-text-dark.png");
-    logoFull2.setAttribute("src", "../images/logo-with-text-dark.png");
-    logoIcon.setAttribute("src", "../images/logo-dark.png");
-    logoText.setAttribute("src", "../images/logo-text-dark.png");
-    qrCodeImg && qrCodeImg.setAttribute("src", "../images/qrcode-dark.png");
+    logoFull.setAttribute("src", "/assets/dashboard/images/logo-with-text-dark.png");
+    logoFull2.setAttribute("src", "/assets/dashboard/images/logo-with-text-dark.png");
+    logoIcon.setAttribute("src", "/assets/dashboard/images/logo-dark.png");
+    logoText.setAttribute("src", "/assets/dashboard/images/logo-text-dark.png");
+    qrCodeImg && qrCodeImg.setAttribute("src", "/assets/dashboard/images/qrcode-dark.png");
   }
 };
 
@@ -159,13 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (darkBtn) {
       darkBtn.classList.add("active");
       lightBtn.classList.remove("active");
-      logoFull.setAttribute("src", "../images/logo-with-text-dark.png");
-      logoIcon.setAttribute("src", "../images/logo-dark.png");
-      logoText.setAttribute("src", "../images/logo-text-dark.png");
+      logoFull.setAttribute("src", "/assets/dashboard/images/logo-with-text-dark.png");
+      logoIcon.setAttribute("src", "/assets/dashboard/images/logo-dark.png");
+      logoText.setAttribute("src", "/assets/dashboard/images/logo-text-dark.png");
     }
     logoFull2 &&
-      logoFull2.setAttribute("src", "../images/logo-with-text-dark.png");
-    qrCodeImg && qrCodeImg.setAttribute("src", "../images/qrcode-dark.png");
+      logoFull2.setAttribute("src", "/assets/dashboard/images/logo-with-text-dark.png");
+    qrCodeImg && qrCodeImg.setAttribute("src", "/assets/dashboard/images/qrcode-dark.png");
   } else {
     darkBtn && darkBtn.classList.remove("active");
     lightBtn && lightBtn.classList.add("active");
@@ -590,6 +590,10 @@ if (document.querySelector(".qt-modal-paypal-btn")) {
   setupModalMultiple(".qt-modal-paypal-btn", ".qt-modal-paypal", ".qt-modal-paypal-close-btn");
 }
 
+if (document.querySelector(".qt-modal-internal-btn")) {
+  setupModalMultiple(".qt-modal-internal-btn", ".qt-modal-internal", ".qt-modal-internal-close-btn");
+}
+
 // dropdown menu three dots
 document.addEventListener("click", function (event) {
   // Find all dropdown buttons and their corresponding dropdowns
@@ -821,7 +825,7 @@ class Slider {
         (this.options.max - this.options.min)) *
       100;
     return (
-      "background: linear-gradient(to right, #20B757, #20B757 " +
+      "background: linear-gradient(to right, #1862dd, #1862dd " +
       percentage +
       "%, #d3edff " +
       percentage +

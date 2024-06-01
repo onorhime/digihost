@@ -1,0 +1,258 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}
+    Card Information
+{% endblock %}
+
+{% block main %}
+     <main class="main-content has-sidebar">
+    <div class="main-inner">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 lg:mb-8">
+  <h2 class="h2">Card Overview</h2>
+  
+</div>
+
+      <div class="flex flex-col gap-4 xxl:gap-6">
+        <!-- popular cards -->
+        <div class="box">
+          <div class="bb-dashed border-secondary1/20 flex justify-between items-center mb-6 pb-6">
+            <h4 class="h4">My Cards</h4>
+
+
+          </div>
+          <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+           {% for card in app.user.cards %}
+             <a href={{path("card")}}
+              class="col-span-12 text-n0 sm:col-span-6 lg:col-span-4 4xl:col-span-3 rounded-xl p-5 relative overflow-hidden after:absolute after:rounded-full after:w-[300px] after:h-[300px] after:bg-[#FFC861] after:top-[45%] after:ltr:left-[60%] after:rtl:right-[60%] bg-secondary1">
+              <div class="mb-3 sm:mb-6 flex justify-between items-center">
+                <div>
+                  <p class="text-xs mb-1">Card {{card.status}}</p>
+                  <h4 class="h4">{{ app.user.totalbalance|number_format('2', '.', ',') }}</h4>
+                </div>
+                <img src={{ asset("assets/dashboard/images/visa-sm.png") }} width="36" height="13" class="mb-1" alt="visa" />
+              </div>
+              <div>
+                <img src={{ asset("assets/dashboard/images/mastercard.png") }} width="45" height="45" class="mb-1" alt="visa" />
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="text-sm font-semibold mb-1">{{app.user.firstname ~ ' ' ~  app.user.lastname}}</p>
+                    <p class="text-xs">•••• •••• •••• {{card.number|slice(-4)}}</p>
+                  </div>
+                  <span class="text-n700 relative z-[1]">{{card.exp}}</span>
+                  {# •••• •••• •••• •••• #}
+                </div>
+              </div>
+            </a>
+           {% endfor %}
+           
+           
+             <div class="col-span-12 sm:col-span-6 lg:col-span-4 4xl:col-span-3 border border-dashed self-stretch max-xxxl:py-14 w-full rounded-2xl border-primary bg-primary/10 flex flex-col justify-center items-center text-center h-full">
+              <button class="bg-primary text-n0 p-2 rounded-full mb-3">
+                <i class="las la-plus"></i>
+              </button>
+              <p class="font-medium mb-2">Purchase New Credit Card</p>
+              <button class="text-sm text-primary add-card-btn">
+                Add Now
+              </button>
+            </div>
+
+           
+          </div>
+        </div>
+        <!-- Your Credits -->
+        <div class="box col-span-12 lg:col-span-6">
+          <div class="flex flex-wrap gap-4  justify-between items-center bb-dashed mb-4 pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Card History</h4>
+            
+          </div>
+          <div class="overflow-x-auto pb-4 lg:pb-6">
+            <table class="w-full whitespace-nowrap select-all-table" id="transactionTable">
+              <thead>
+                <tr class="bg-secondary1/5 dark:bg-bg3">
+                  <th class="text-start w-16 px-6 !py-5" data-sortable="false">
+                    <input name="select-all" type="checkbox" id="selectAllCheckbox"
+                      class="accent-secondary1 focus:border-none focus:shadow-none focus:outline-none" />
+                  </th>
+                  <th class="text-start !py-5 px-6 cursor-pointer min-w-[330px]">
+                    <div class="flex items-center gap-1">
+                      Title
+                    </div>
+                  </th>
+                 
+                  <th class="text-start !py-5 min-w-[200px] cursor-pointer">
+                    <div class="flex items-center gap-1">
+                      Amount Spent
+                    </div>
+                  </th>
+                  <th class="text-start !py-5 min-w-[200px] cursor-pointer">
+                    <div class="flex items-center gap-1">
+                      Account Interest
+                    </div>
+                  </th>
+                  <th class="text-start !py-5 min-w-[100px] cursor-pointer">
+                    <div class="flex items-center gap-1">
+                      Status
+                    </div>
+                  </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for transaction in app.user.cardtransactions %}
+                  <tr class="border-b border-t border-n30 dark:border-n500">
+                  <td class="text-start px-6">
+                    <input type="checkbox" class="accent-secondary1" />
+                  </td>
+                  <td class="py-2 px-6">
+                    <div class="flex items-center gap-3">
+                      <img src={{ asset("assets/dashboard/images/card-sm-4.png") }} width="60" height="40" class="rounded-sm"
+                        alt="payment medium icon" />
+                      <div>
+                        <p class="font-medium mb-1">{{app.user.firstname ~ ' ' ~  app.user.lastname}}</p>
+                        <span class="text-xs">•••• - Exp: 12/27</span>
+                      </div>
+                    </div>
+                  </td>
+                  
+                  <td>
+                    <div>
+                      <p class="font-medium mb-1">
+                        ${{ transaction.amount|number_format('2', '.', ',') }}
+                      </p>
+                      <span class="text-xs">Amount Spent</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p class="font-medium mb-1">
+                        $ ${{ transaction.interest|number_format('2', '.', ',') }}
+                      </p>
+                      <span class="text-xs">Account Interest</span>
+                    </div>
+                  </td>
+                  <td class="py-2">
+                    {% if transaction.status is same as('pending') %}
+                      <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 py-2 bg-secondary3/10 dark:bg-bg3 text-secondary3">
+                      Pending
+                    </span>
+                    {% endif %}
+                     {% if transaction.status is same as('approved') %}
+                      <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 py-2 bg-primary/10 dark:bg-bg3 text-primary">
+                      Successful
+                    </span>
+                    {% endif %}
+                     {% if transaction.status is same as('declined') %}
+                      <span
+                      class="block text-xs w-28 xxl:w-36 text-center rounded-[30px] dark:border-n500 border border-n30 py-2 bg-secondary2/10 dark:bg-bg3 text-secondary2">
+                      Failed
+                    </span>
+                    {% endif %}
+                    
+                  </td>
+               
+                </tr>
+                {% endfor %}
+             
+              </tbody>
+            </table>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </main>
+    <!-- Add New card modal -->
+  <div class="add-card-modal fixed inset-0 z-[99] modalhide overflow-y-auto bg-n900/80 duration-500">
+    <div class="overflow-y-auto">
+      <div
+        class="modal box modal-inner absolute left-1/2 -translate-y-1/2 top-1/2 max-h-[90vh] w-[95%] max-w-[496px] -translate-x-1/2 overflow-y-auto duration-300 xl:p-8">
+        <!-- { "translate-y-0 scale-100 opacity-100 my-10": open } -->
+        <div class="relative">
+          <button class="add-card-modal-close-btn absolute top-0 ltr:right-0 rtl:left-0">
+            <i class="las la-times"></i>
+          </button>
+          <div class="bb-dashed mb-4 flex items-center justify-between pb-4 lg:mb-6 lg:pb-6">
+            <h4 class="h4">Create Bank Account</h4>
+          </div>
+          <form id="cardform">
+            <div class="mt-6 xl:mt-8 grid grid-cols-2 gap-4 xxxl:gap-6">
+             
+              <div class="col-span-2">
+                <label for="holder" class="md:text-lg font-medium block mb-4">
+                  Select Payment Gateway
+                </label>
+                <select type="text" name="gateway"
+                  class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-6 py-2.5 md:py-3"
+                  placeholder="Payment Gateway" id="gateway" required>
+                  <option value="">select gateway</option>
+                  <option value="btc">Bitcoin</option>
+                  <option value="bank">Bank Transfer</option>
+                  <option value="usdt">USDT(trc20)</option>
+                </select>
+              </div>
+
+              <div class="col-span-2" id="walletcontainer">
+                <label for="month" class="md:text-lg font-medium block mb-4">
+                  Wallet Address
+                </label>
+                <input type="text"
+                  class="w-full text-sm bg-secondary1/5 dark:bg-bg3 border border-n30 dark:border-n500 rounded-3xl px-6 py-2.5 md:py-3"
+                  placeholder="" id="wallet" readonly/>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <label for="year" class="md:text-sm font-medium block mb-4">
+                 Card Activation Fee: ${{ app.user.cardactivationamount|number_format('0', '.', ',') }}
+                </label>
+               
+              </div>
+              <div class="col-span-2 mt-4">
+                <button class="btn flex w-full justify-center" type="submit">
+                  Purchase Card
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block customJs %}
+    <script src={{ asset("assets/dashboard/js/card.js")}}></script>
+    <script>
+    const gateway = document.getElementById("gateway");
+    
+
+gateway.addEventListener("change", (e) => {
+    let wallet;
+    switch (gateway.value) {
+        case "btc":
+            wallet = '{{ app.user.btcaddress }}';
+            document.getElementById("wallet").value = wallet
+            document.getElementById("walletcontainer").style.display = 'block'
+            break;
+        case "usdt":
+            wallet = '{{ app.user.usdtaddress }}';
+            document.getElementById("wallet").value = wallet
+            document.getElementById("walletcontainer").style.display = 'block';
+            break;
+        case "bank":
+            Swal.fire({
+                title: "Bank Transfer Not Avaliable",
+                text: "Due to the high usage of this gateway, it is currently not available at the moment, please select another paymeny gateway.",
+                icon: 'error'
+              });
+            document.getElementById("walletcontainer").style.display = "none";
+            break;
+        default:
+            break;
+    }
+
+    
+})
+</script>
+
+{% endblock %}
