@@ -70,9 +70,9 @@ class AdminController extends AbstractController
             $em->persist($id);
             $em->flush();
             if(!$id->isStatus()){
-                $message = "Dear ". $id->getFirstname() . " " . $id->getLastname() . " Due to Some Valid Reasons, Your Eliteforte Account Was De-Activated, please contact our support team for further investigation";
+                $message = "Dear ". $id->getFirstname() . " " . $id->getLastname() . " Due to Some Valid Reasons, Your Digihost Account Was De-Activated, please contact our support team for further investigation";
                 $this->emailSender->sendTwigEmail($id->getEmail(), "Account De-Activated", "emails/noti.html.twig", [
-                    "title" => "Eliteforte Account De-Activated",
+                    "title" => "Digihost Account De-Activated",
                     "message" => $message,
                 ]);
             }

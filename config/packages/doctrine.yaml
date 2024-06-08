@@ -2,9 +2,9 @@ doctrine:
     dbal:
         # url: '%env(resolve:DATABASE_URL)%'
         host: localhost
-        dbname: eliteforte
-        user: eliteforte
-        password: eliteforte 
+        dbname: digihost
+        user: root
+        password:  
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: utf8mb4

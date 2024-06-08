@@ -19,7 +19,7 @@ class EmailSender
     public function sendTwigEmail(string $recipientEmail, string $subject, string $templatePath, array $context = []): void
     {
         $email = (new TemplatedEmail())
-            ->from('support@eliteforte.net')
+            ->from('info@digihostltd.com')
             ->to($recipientEmail)
             ->subject($subject)
             ->htmlTemplate($templatePath)

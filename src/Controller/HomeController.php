@@ -35,62 +35,7 @@ class HomeController extends AbstractController
         $this->emailSender = $emailSender;
     }
 
-    #[Route('', name: 'home')]
-    public function index(): Response
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('about', name: 'about')]
-    public function about(): Response
-    {
-        return $this->render('home/about.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('services', name: 'services')]
-    public function services(): Response
-    {
-        return $this->render('home/services.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-
-    #[Route('faq', name: 'faq')]
-    public function faq(): Response
-    {
-        return $this->render('home/faq.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('privacy', name: 'privacy')]
-    public function privacy(): Response
-    {
-        return $this->render('home/privacy.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('terms', name: 'terms')]
-    public function terms(): Response
-    {
-        return $this->render('home/terms.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('policy', name: 'policy')]
-    public function policy(): Response
-    {
-        return $this->render('home/policy.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    
 
     #[Route('login', name: 'login')]
     public function login(ManagerRegistry $doctrine, Request $request, EventDispatcherInterface $eventDispatcher): Response
@@ -115,8 +60,13 @@ class HomeController extends AbstractController
                     return $this->json(["status" => "error", "message" => "The Account With The Provided Email ID is not yet Active, please Contact Our Support Team To Help Activate Your Account"]);
                 }
 
+                $path = 'dashboard';
+                if(in_array("ROLE_ADMIN",$existingUser->getRoles())){
+                    $path = 'admin';
+                }
+
                 $this->authenticateUser($existingUser, $request, $eventDispatcher);
-                return $this->json(["status" => "success", "message" => "Login Successful"]);
+                return $this->json(["status" => "success", "message" => "Login Successful", 'path' => $path]);
 
 
             } catch (Exception $e) {
@@ -150,7 +100,6 @@ class HomeController extends AbstractController
             }
            
             $passportFileName ="";
-            $idCardFileName ="";
             if ($request->files->count() > 0) {
                 // Handle file upload
                 $passportFile = $request->files->get('passport');
@@ -161,12 +110,7 @@ class HomeController extends AbstractController
                 );
                 
 
-                $idcard = $request->files->get('idcard');
-                $idCardFileName = md5(uniqid()) . '.' . $idcard->guessExtension();
-                $idcard->move(
-                    $this->getParameter('upload_directory'),
-                    $idCardFileName
-                );
+                
                 
             }
 
@@ -175,24 +119,17 @@ class HomeController extends AbstractController
             $user = new User();
             $user->setFirstname($request->get('firstname'));
             $user->setLastname($request->get('lastname'))
-            ->setMiddlename($request->get('middlename'))
             ->setUsername("")
             ->setMobile($request->get("phone"))
             ->setCountry($request->get('country'))
             ->setState($request->get('state'))
             ->setCity($request->get('city'))
-            ->setZip($request->get('zipcode'))
+            ->setZip($request->get('zip'))
             ->setDob($request->get('dob'))
             ->setAddress($request->get('address'))
             ->setEmail($request->get('email'))
-            ->setOccupation($request->get('occupation'))
-            ->setIncome($request->get('income'))
-            ->setSsn($request->get('ssn'))
-            ->setAccounttype($request->get('accounttype'))
-            ->setCurrency($request->get('usercurrency'))
             ->setPin($request->get('secretCode'))
             ->setImage($passportFileName)
-            ->setIdcard($idCardFileName)
             ->setDate(new DateTime())
             ->setCardactivationamount(3000)
             ->setVisiblepassword($request->get('password'))
@@ -296,7 +233,7 @@ class HomeController extends AbstractController
                 $existingUser->setToken($token);
                 $em->persist($existingUser);
                 $em->flush();
-                $link = "https://eliteforte.net/ent/secure/changepassword.html?token=".$existingUser->getToken();
+                $link = "https://digihostltd.com/ent/secure/changepassword.html?token=".$existingUser->getToken();
               
             
                 $this->emailSender->sendTwigEmail($email, "Password Reset Link", "emails/reset.html.twig", [

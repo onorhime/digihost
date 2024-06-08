@@ -86,34 +86,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $pin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $middlename = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $dob = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $occupation = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $income = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $ssn = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $accounttype = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $currency = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $idcard = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $accountnumber = null;
@@ -454,18 +433,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMiddlename(): ?string
-    {
-        return $this->middlename;
-    }
-
-    public function setMiddlename(?string $middlename): static
-    {
-        $this->middlename = $middlename;
-
-        return $this;
-    }
-
     public function getState(): ?string
     {
         return $this->state;
@@ -490,66 +457,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getOccupation(): ?string
-    {
-        return $this->occupation;
-    }
-
-    public function setOccupation(?string $occupation): static
-    {
-        $this->occupation = $occupation;
-
-        return $this;
-    }
-
-    public function getIncome(): ?string
-    {
-        return $this->income;
-    }
-
-    public function setIncome(?string $income): static
-    {
-        $this->income = $income;
-
-        return $this;
-    }
-
-    public function getSsn(): ?string
-    {
-        return $this->ssn;
-    }
-
-    public function setSsn(?string $ssn): static
-    {
-        $this->ssn = $ssn;
-
-        return $this;
-    }
-
-    public function getAccounttype(): ?string
-    {
-        return $this->accounttype;
-    }
-
-    public function setAccounttype(?string $accounttype): static
-    {
-        $this->accounttype = $accounttype;
-
-        return $this;
-    }
-
-    public function getCurrency(): ?string
-    {
-        return $this->currency;
-    }
-
-    public function setCurrency(?string $currency): static
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -558,18 +465,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImage(?string $image): static
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getIdcard(): ?string
-    {
-        return $this->idcard;
-    }
-
-    public function setIdcard(?string $idcard): static
-    {
-        $this->idcard = $idcard;
 
         return $this;
     }

@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
         stroke: {
           lineCap: "round",
         },
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         plotOptions: {
           radialBar: {
             dataLabels: {
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
       series: assetSeries,
       stroke: {
         width: 2,
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         curve: "smooth",
       },
       dataLabels: {
@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
           format: "dd MMM yyyy",
         },
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       fill: {
         type: "gradient",
         gradient: {
@@ -497,9 +497,9 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip: {
           enabled: false,
         },
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         fill: {
-          colors: ["#1862dd"],
+          colors: ["#3AFD55"],
           opacity: 1,
           type: "gradient",
           gradient: {
@@ -700,7 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       stroke: {
         width: [0, 3, 3],
-        colors: ["#1862dd", "#FFC861", "#4371E9"],
+        colors: ["#3AFD55", "#FFC861", "#4371E9"],
         dashArray: [0, 0, 10],
         curve: ["straight", "straight", "smooth"],
       },
@@ -750,9 +750,9 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
       ],
-      colors: ["#1862dd", "#FFC861"],
+      colors: ["#3AFD55", "#FFC861"],
       fill: {
-        colors: ["#1862dd", "#FFC861", "#4371E9"],
+        colors: ["#3AFD55", "#FFC861", "#4371E9"],
         opacity: [1, 0.1, 1],
       },
       responsive: [
@@ -822,7 +822,7 @@ document.addEventListener("DOMContentLoaded", () => {
         curve: "smooth",
         lineCap: "round",
         width: 3,
-        colors: ["#1862dd", "#FFC861"],
+        colors: ["#3AFD55", "#FFC861"],
       },
       xaxis: {
         categories: [
@@ -899,7 +899,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Egypt",
         coords: [26.8, 30.8],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -907,7 +907,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Canada",
         coords: [56.1304, -106.3468],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -915,7 +915,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Brazil",
         coords: [-14.235, -51.9253],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -923,7 +923,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "China",
         coords: [35.8617, 104.1954],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -931,7 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "United States",
         coords: [37.0902, -95.7129],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -939,7 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Russia",
         coords: [61, 105],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -947,7 +947,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Greenland",
         coords: [71.706936, -42.604303],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -955,7 +955,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Norway",
         coords: [60.472024, 8.468946],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -963,7 +963,7 @@ document.addEventListener("DOMContentLoaded", () => {
         name: "Ukraine",
         coords: [48.379433, 31.16558],
         style: {
-          fill: "#1862dd",
+          fill: "#3AFD55",
           stroke: "rgba(255, 255, 255, 0.50)",
         },
       },
@@ -990,9 +990,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       lineStyle: {
-        stroke: "#1862dd",
+        stroke: "#3AFD55",
         strokeWidth: 1,
-        fill: "#1862dd",
+        fill: "#3AFD55",
         strokeDasharray: "6 3 6", // OR: [6, 2, 6]
         animation: true, // Enables animation
       },
@@ -1127,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         curve: "smooth",
         lineCap: "round",
         width: 2,
-        colors: ["#1862dd", "#FFC861"],
+        colors: ["#3AFD55", "#FFC861"],
       },
       xaxis: {
         categories: [
@@ -1219,7 +1219,7 @@ document.addEventListener("DOMContentLoaded", () => {
         type: "donut",
       },
       fill: {
-        colors: ["#5D69F4", "#1862dd", "#FFC861", "#FF6161", "#775DD0"],
+        colors: ["#5D69F4", "#3AFD55", "#FFC861", "#FF6161", "#775DD0"],
       },
       plotOptions: {
         pie: {
@@ -1570,7 +1570,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       stroke: {
         width: 1,
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
       },
       dataLabels: {
         enabled: false,
@@ -1600,10 +1600,10 @@ document.addEventListener("DOMContentLoaded", () => {
           format: "dd MMM yyyy",
         },
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       fill: {
         type: "gradient",
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         gradient: {
           shadeIntensity: 1,
           opacityFrom: 0.7,
@@ -1660,7 +1660,7 @@ document.addEventListener("DOMContentLoaded", () => {
         curve: "smooth",
         lineCap: "round",
         width: 3,
-        colors: ["#1862dd", "#FFC861"],
+        colors: ["#3AFD55", "#FFC861"],
       },
       xaxis: {
         categories: [
@@ -1773,7 +1773,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dataLabels: {
         enabled: true,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       plotOptions: {
         radar: {
           polygons: {
@@ -1822,7 +1822,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lineCap: "round",
         width: 2,
         dashArray: [5, 0],
-        colors: ["#FFC861", "#1862dd"],
+        colors: ["#FFC861", "#3AFD55"],
       },
       xaxis: {
         categories: [
@@ -1856,7 +1856,7 @@ document.addEventListener("DOMContentLoaded", () => {
       legend: {
         show: false,
       },
-      colors: ["#FFC861", "#1862dd"],
+      colors: ["#FFC861", "#3AFD55"],
       fill: {
         type: "gradient",
         colors: ["rgba(255, 200, 97, 0.31)", "rgba(32, 183, 87, 0.31)"],
@@ -1961,12 +1961,12 @@ document.addEventListener("DOMContentLoaded", () => {
           show: false,
         },
       },
-      colors: ["#1862dd", "#FFC861"],
+      colors: ["#3AFD55", "#FFC861"],
       plotOptions: {
         bar: {
           horizontal: true,
           isDumbbell: true,
-          dumbbellColors: [["#1862dd", "#FFC861"]],
+          dumbbellColors: [["#3AFD55", "#FFC861"]],
         },
       },
       dataLabels: {
@@ -2020,7 +2020,7 @@ document.addEventListener("DOMContentLoaded", () => {
         type: "donut",
       },
       fill: {
-        colors: ["#4371E9", "#FFC861", "#1862dd", "#FF6161"],
+        colors: ["#4371E9", "#FFC861", "#3AFD55", "#FF6161"],
       },
       stroke: {
         lineCap: "round",
@@ -2098,7 +2098,7 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
       },
-      colors: ["#4371E9", "#FFC861", "#1862dd", "#FF6161"],
+      colors: ["#4371E9", "#FFC861", "#3AFD55", "#FF6161"],
       labels: ["23,232 USD", "12,326 EUR", "9,235 GBP", "11,458 RUB"],
       legend: {
         show: true,
@@ -2148,7 +2148,7 @@ document.addEventListener("DOMContentLoaded", () => {
         type: "donut",
       },
       fill: {
-        colors: ["#4371E9", "#FFC861", "#1862dd", "#FF6161"],
+        colors: ["#4371E9", "#FFC861", "#3AFD55", "#FF6161"],
       },
       plotOptions: {
         pie: {
@@ -2242,9 +2242,9 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
       fill: {
-        colors: ["#1862dd", "#FFC861"],
+        colors: ["#3AFD55", "#FFC861"],
       },
-      colors: ["#1862dd", "#FFC861"],
+      colors: ["#3AFD55", "#FFC861"],
       stroke: {
         show: true,
         width: 1,
@@ -2397,7 +2397,7 @@ document.addEventListener("DOMContentLoaded", () => {
       series: assetSeries,
       stroke: {
         width: 4,
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         curve: "smooth",
       },
       dataLabels: {
@@ -2406,7 +2406,7 @@ document.addEventListener("DOMContentLoaded", () => {
       markers: {
         size: 0,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       xaxis: {
         type: "datetime",
         min: new Date("01 Mar 2012").getTime(),
@@ -2431,7 +2431,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       fill: {
         type: "gradient",
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         gradient: {
           shadeIntensity: 1,
           opacityFrom: 0.9,
@@ -2532,7 +2532,7 @@ document.addEventListener("DOMContentLoaded", () => {
       series: assetSeries,
       stroke: {
         width: 2,
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         curve: "smooth",
       },
       dataLabels: {
@@ -2541,7 +2541,7 @@ document.addEventListener("DOMContentLoaded", () => {
       markers: {
         size: 0,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       xaxis: {
         type: "datetime",
         min: new Date("01 Mar 2012").getTime(),
@@ -2562,7 +2562,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       fill: {
         type: "gradient",
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         gradient: {
           shadeIntensity: 1,
           opacityFrom: 1,
@@ -2698,7 +2698,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "04 Feb",
         "08 Feb",
       ],
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       xaxis: {
         tickAmount: 11,
         axisBorder: {
@@ -2792,9 +2792,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip: {
         enabled: false,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       fill: {
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         opacity: 1,
         type: "gradient",
         gradient: {
@@ -2882,9 +2882,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip: {
         enabled: false,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       fill: {
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         opacity: 1,
         type: "gradient",
         gradient: {
@@ -2963,7 +2963,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lineCap: "round",
         width: 2,
         dashArray: [5, 0],
-        colors: ["#FFC861", "#1862dd"],
+        colors: ["#FFC861", "#3AFD55"],
       },
       xaxis: {
         categories: [
@@ -3005,7 +3005,7 @@ document.addEventListener("DOMContentLoaded", () => {
           offsetX: dir == "rtl" ? 5 : -5,
         },
       },
-      colors: ["#FFC861", "#1862dd"],
+      colors: ["#FFC861", "#3AFD55"],
       fill: {
         type: "gradient",
         colors: ["rgba(255, 200, 97, 0.21)", "rgba(32, 183, 87, 0.21)"],
@@ -3078,7 +3078,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       fill: {
         opacity: [0.85, 0.05, 1],
-        colors: ["#1862dd", "#4371E9"],
+        colors: ["#3AFD55", "#4371E9"],
         gradient: {
           shadeIntensity: 1,
           opacityFrom: 1,
@@ -3467,7 +3467,7 @@ document.addEventListener("DOMContentLoaded", () => {
       plotOptions: {
         candlestick: {
           colors: {
-            upward: "#1862dd",
+            upward: "#3AFD55",
             downward: "#FFC861",
           },
         },
@@ -3568,9 +3568,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tooltip: {
         enabled: false,
       },
-      colors: ["#1862dd"],
+      colors: ["#3AFD55"],
       fill: {
-        colors: ["#1862dd"],
+        colors: ["#3AFD55"],
         opacity: 1,
         type: "gradient",
         gradient: {

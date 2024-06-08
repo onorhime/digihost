@@ -594,6 +594,10 @@ if (document.querySelector(".qt-modal-internal-btn")) {
   setupModalMultiple(".qt-modal-internal-btn", ".qt-modal-internal", ".qt-modal-internal-close-btn");
 }
 
+if (document.querySelector(".qt-modal-4-btn")) {
+  setupModalMultiple(".qt-modal-4-btn", ".qt-modal-4", ".qt-modal-4-close-btn");
+}
+
 // dropdown menu three dots
 document.addEventListener("click", function (event) {
   // Find all dropdown buttons and their corresponding dropdowns
@@ -825,7 +829,7 @@ class Slider {
         (this.options.max - this.options.min)) *
       100;
     return (
-      "background: linear-gradient(to right, #1862dd, #1862dd " +
+      "background: linear-gradient(to right, #3AFD55, #3AFD55 " +
       percentage +
       "%, #d3edff " +
       percentage +
@@ -1048,7 +1052,7 @@ loginForm &&
     event.preventDefault();
     if (validateLoginForm()) {
       // Form is valid, proceed with submission
-      this.submit();
+      // this.submit();
     }
   });
 signupForm &&
@@ -1056,6 +1060,6 @@ signupForm &&
     event.preventDefault();
     if (validateSignupForm()) {
       // Form is valid, proceed with submission
-      this.submit();
+      //this.submit();
     }
   });
