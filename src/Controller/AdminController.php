@@ -156,8 +156,9 @@ class AdminController extends AbstractController
             $transaction = $doctrine->getRepository(Transaction::class)->find($request->get('id'));
             $transaction->setStatus('complete')
             ->setDate(new \DateTime($request->get("date")));
+            $tuser =  $transaction->getUser();
             if($transaction->getType() == "deposit"){
-               $tuser =  $transaction->getUser();
+               
                $tuser->setTotalbalance($tuser->getTotalbalance() + $transaction->getAmount());
                $em->persist($tuser);
             }
@@ -167,12 +168,14 @@ class AdminController extends AbstractController
             $em->flush();
 
             
-            //$emailSender->sendDepEmail($user->getEmail(), 'Withdrawal Confirmed', "your withdrawal was confirmed successfully", ['name'=>$user->getName(), 'message'=>"your withdrawal of $$amount has been confirmed and deposited to your wallet successfuly"]);
-            
-            noty()->addSuccess("wihdrawal was successfuly approved");
+            $this->emailSender->sendTwigEmail($tuser->getEmail(), "Transaction Complete", "emails/noti.html.twig", [
+                "title" => "Transaction Complete",
+                "message" => $tuser->getFirstname() . " " . $tuser->getLastname() . ",  your transaction of $". $amount . " has been approved successfully",
+            ]);
+            noty()->addSuccess("Transaction was successfuly approved");
             return $this->redirectToRoute('withdrawallist');
             
-        }
+        } 
         if(null != $request->get('delete')){
             $transaction = $doctrine->getRepository(Transaction::class)->find($request->get('id')); 
             $transaction->setStatus('failed')
@@ -231,14 +234,16 @@ class AdminController extends AbstractController
         if(null != $request->get('approve')){
             $card = $doctrine->getRepository(Card::class)->find($request->get('id'));
             $card->setStatus('Active');
-
+            $user = $card->getUser();
            
             $em->persist($card);
             $em->flush();
 
             
-            //$emailSender->sendDepEmail($user->getEmail(), 'Withdrawal Confirmed', "your withdrawal was confirmed successfully", ['name'=>$user->getName(), 'message'=>"your withdrawal of $$amount has been confirmed and deposited to your wallet successfuly"]);
-            
+            $this->emailSender->sendTwigEmail($user->getEmail(), "Card Issued", "emails/noti.html.twig", [
+                "title" => "Card Approved",
+                "message" => $user->getFirstname() . " " . $user->getLastname() . ", Your Card Has Been Issurd Successfully",
+            ]);
             noty()->addSuccess("card was successfuly approved");
             return $this->redirectToRoute('cardrequest');
             
