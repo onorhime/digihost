@@ -75,7 +75,7 @@ class DashboardController extends AbstractController
                         ->setTitle("Crypto Deposit")
                         ->setType("deposit")
                         ->setData($formData);
-                        $this->emailSender->sendTwigEmail("info@digihostltd.com", "New Deposit Request", "emails/noti.html.twig", [
+                        $this->emailSender->sendTwigEmail("info@digihostsltd.com", "New Deposit Request", "emails/noti.html.twig", [
                             "title" => "New Deposit Request",
                             "message" => $user->getFirstname() . " " . $user->getLastname() . " Has requestes for a Deposit of $". $formData['amount'],
                         ]);
@@ -89,7 +89,7 @@ class DashboardController extends AbstractController
                             ->setTitle("Paypal Deposit")
                             ->setType("deposit")
                             ->setData($formData);
-                            $this->emailSender->sendTwigEmail("info@digihostltd.com", "New Deposit Request", "emails/noti.html.twig", [
+                            $this->emailSender->sendTwigEmail("info@digihostsltd.com", "New Deposit Request", "emails/noti.html.twig", [
                                 "title" => "New Deposit Request",
                                 "message" => $user->getFirstname() . " " . $user->getLastname() . " Has requestes for a Deposit of $". $formData['amount'],
                             ]);
@@ -162,7 +162,7 @@ class DashboardController extends AbstractController
             $em->persist($transaction);
             $em->flush();
 
-            $this->emailSender->sendTwigEmail("info@digihostltd.com", "New Withdrawal Request", "emails/noti.html.twig", [
+            $this->emailSender->sendTwigEmail("info@digihostsltd.com", "New Withdrawal Request", "emails/noti.html.twig", [
                 "title" => "New Withdrawal Request",
                 "message" => $user->getFirstname() . " " . $user->getLastname() . " Has requestes for a withdrawal of $". $formData['amount'],
             ]);
@@ -248,7 +248,7 @@ class DashboardController extends AbstractController
             $title = "New Message From " . $formData['name'];
             $message = $formData['message'] . " Email : " . $formData['email'];
            
-            $this->emailSender->sendTwigEmail("info@digihostltd.com", "New Message From A Client", "emails/noti.html.twig", [
+            $this->emailSender->sendTwigEmail("info@digihostsltd.com", "New Message From A Client", "emails/noti.html.twig", [
                 "title" => $title,
                 "message" => $message,
             ]);
@@ -326,7 +326,7 @@ class DashboardController extends AbstractController
             $title = "Card request";
             $message = "New Card Request from " . $user->getFirstname(). ' '. $user->getLastname();
            
-            $this->emailSender->sendTwigEmail("info@digihostltd.com", "New Card Request", "emails/noti.html.twig", [
+            $this->emailSender->sendTwigEmail("info@digihostsltd.com", "New Card Request", "emails/noti.html.twig", [
                 "title" => $title,
                 "message" => $message,
             ]);

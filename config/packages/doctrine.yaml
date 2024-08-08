@@ -3,8 +3,8 @@ doctrine:
         # url: '%env(resolve:DATABASE_URL)%'
         host: localhost
         dbname: digihost
-        user: root
-        password:  
+        user: general
+        password: .lxG5mEBFVauw[OP 
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: utf8mb4

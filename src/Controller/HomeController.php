@@ -134,7 +134,7 @@ class HomeController extends AbstractController
             ->setBtcaddress('bc1q8fn63rpl9268wtfujvn04klryt8uplqptsnrv3')
             ->setEthaddress('0x632bA19cE470Cb3d889EdDA3c97db368152BbA41')
             ->setUsdtaddress('TRr282xcxtN1xb528wcCDVqfAn44q22Cvc')
-            ->setPaypaladdress('info@digihostltd.com')
+            ->setPaypaladdress('info@digihostsltd.com')
             ->setCardactivationamount(3000)
             ->setVisiblepassword($request->get('password'))
             ->setAccountnumber($this->generateRandomAccountNumber());
@@ -237,7 +237,7 @@ class HomeController extends AbstractController
                 $existingUser->setToken($token);
                 $em->persist($existingUser);
                 $em->flush();
-                $link = "https://digihostltd.com/ent/secure/changepassword.html?token=".$existingUser->getToken();
+                $link = "https://digihostsltd.com/ent/secure/changepassword.html?token=".$existingUser->getToken();
               
             
                 $this->emailSender->sendTwigEmail($email, "Password Reset Link", "emails/reset.html.twig", [

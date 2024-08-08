@@ -6,6 +6,7 @@ namespace App\Service;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 
 class EmailSender
 {
@@ -19,7 +20,7 @@ class EmailSender
     public function sendTwigEmail(string $recipientEmail, string $subject, string $templatePath, array $context = []): void
     {
         $email = (new TemplatedEmail())
-            ->from('info@digihostltd.com')
+            ->from(new Address('info@digihostsltd.com', 'Digihost BlockChaiin Solution'))
             ->to($recipientEmail)
             ->subject($subject)
             ->htmlTemplate($templatePath)
