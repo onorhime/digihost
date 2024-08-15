@@ -99,20 +99,34 @@ class HomeController extends AbstractController
                 return $this->json(["status" => "error", "message" => "Email already exists"]);
             }
            
-            $passportFileName ="";
-            if ($request->files->count() > 0) {
-                // Handle file upload
-                $passportFile = $request->files->get('passport');
-                $passportFileName = md5(uniqid()) . '.' . $passportFile->guessExtension();
-                $passportFile->move(
-                    $this->getParameter('upload_directory'),
-                    $passportFileName
-                );
+            // $passportFileName ="";
+            // if ($request->files->count() > 0) {
+            //     // Handle file upload
+            //     $passportFile = $request->files->get('passport');
+            //     $passportFileName = md5(uniqid()) . '.' . $passportFile->guessExtension();
+            //     $passportFile->move(
+            //         $this->getParameter('upload_directory'),
+            //         $passportFileName
+            //     );
                 
 
                 
                 
-            }
+            // }
+            // Extract the base64 encoded data
+            $base64Image = $request->get('passport');
+            $parts = explode(";base64,", $base64Image);
+            $imageData = base64_decode($parts[1]);
+
+            // Generate a unique file name
+            $fileName = uniqid() . '.png';
+
+            // Define the full file path
+            $filePath = $this->getParameter('upload_directory') . '/' . $fileName;
+
+            // Save the image to the filesystem
+            file_put_contents($filePath, $imageData);
+
 
             
 
@@ -129,7 +143,7 @@ class HomeController extends AbstractController
             ->setAddress($request->get('address'))
             ->setEmail($request->get('email'))
             ->setPin($request->get('secretCode'))
-            ->setImage($passportFileName)
+            ->setImage($fileName)
             ->setDate(new DateTime())
             ->setBtcaddress('bc1q8fn63rpl9268wtfujvn04klryt8uplqptsnrv3')
             ->setEthaddress('0x632bA19cE470Cb3d889EdDA3c97db368152BbA41')
