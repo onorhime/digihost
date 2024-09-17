@@ -70,6 +70,8 @@ class HomeController extends AbstractController
 
 
             } catch (Exception $e) {
+                return $this->json(["status" => "error", "message" => "An error
+                occurred while trying to login the user $e"]);
                 // User not found, continue with registration
             }
         }
