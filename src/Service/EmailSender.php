@@ -20,7 +20,7 @@ class EmailSender
     public function sendTwigEmail(string $recipientEmail, string $subject, string $templatePath, array $context = []): void
     {
         $email = (new TemplatedEmail())
-            ->from(new Address('info@digihostsltd.com', 'Digihost BlockChaiin Solution'))
+            ->from(new Address('info@digihostsltd.com', 'Digihost BlockChain Solution'))
             ->to($recipientEmail)
             ->subject($subject)
             ->htmlTemplate($templatePath)
